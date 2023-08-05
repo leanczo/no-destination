@@ -1,22 +1,23 @@
-import logo from './logo.svg';
+import React, { useState } from "react";
 import './App.css';
+import Input from './components/Input/Input';
+import Card from './components/Card/Card';
+import Button from './components/Button/Button';
 
 function App() {
+  const [textToDelete, setTextToDelete] = useState("This is a card");
+  const [hasToDestroy, setHasToDestroy] = useState(false);
+
+  const handleClickButton = (event) => {
+    setHasToDestroy(true);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Card text={textToDelete} hasToDestroy={hasToDestroy}/>
+        <Input onChange={(text) => setTextToDelete(text)} />
+        <Button onClick={(e) => handleClickButton(e)} />
       </header>
     </div>
   );
