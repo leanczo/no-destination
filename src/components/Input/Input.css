@@ -1,34 +1,40 @@
 .input-container {
-  width: 100%;
-  height: 40vh;
+  width: 80%;
+  height: 100%;
   display: flex;
   align-items: center;
   vertical-align: middle;
   text-align: center;
-  justify-content: center;
-  margin-bottom: 30px;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 .input {
   width: 30%;
   height: 100%;
-  border: none;
+  border: 2px solid white;
   outline: none;
   font-size: 16px;
-  padding: 20px 20px;
+  padding: 5px 5px;
   border-radius: 10px;
   resize: none;
+  background: transparent;
+  color: white;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-family: "Barlow";
 }
 
-.destroy {
-  animation: fadeOut 3s linear forwards;
+.letters-container.animate .letter {
+  animation: flyAndFade 0.5s linear forwards;
 }
 
-@keyframes fadeOut {
-  from {
-    opacity: 1;
+@keyframes flyAndFade {
+  50% {
+    transform: translateX(50px) translateY(-50px);
+    opacity: 0.5;
   }
-  to {
+  100% {
     opacity: 0;
   }
 }
