@@ -2,39 +2,61 @@ import React, { useEffect, useState } from "react";
 import "./Input.css";
 
 const Input = ({ hasToDestroy, resetDestroy }) => {
-  const [letters, setLetters] = useState([""]);
-  const [text, setText] = useState();
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setLetters(value.split(""));
-    setText(value);
-  };
+  const [text, setText] = useState("");
+  const [letters, setLetters] = useState([]);
 
   useEffect(() => {
     if (hasToDestroy) {
-      setText("");
+      setLetters(
+        text.split("").map((letter) => ({
+          letter,
+          x: Math.random() * window.innerWidth - window.innerWidth / 2,
+          y: Math.random() * window.innerHeight - window.innerHeight / 2,
+        }))
+      );
       setTimeout(() => {
         resetDestroy();
         setLetters([]);
-      }, 500 * letters.length);
+        setText("");
+      }, 3000);
     }
-  }, [hasToDestroy, resetDestroy, letters.length]);
+  }, [hasToDestroy, resetDestroy, text]);
+
+  const handleChange = (e) => {
+    setText(e.target.value);
+  };
 
   return (
     <div className="input-container">
-      <div className={`letters-container ${hasToDestroy ? "animate" : ""}`}>
-        {letters.map((letter, index) => (
-          <span
-            className="letter"
-            style={{ animationDelay: `${index * 50}ms` }}
-          >
-            {letter}
-          </span>
-        ))}
+      <div className="letters-container">
+        {hasToDestroy
+          ? letters.map(({ letter, x, y }, index) => (
+              <span
+                key={index}
+                className="letter animate"
+                style={{
+                  animation: `flyAndFade 3s linear forwards`,
+                  "--x": `${x}px`,
+                  "--y": `${y}px`,
+                  whiteSpace: letter === " " ? "pre" : "normal",
+                }}
+              >
+                {letter}
+              </span>
+            ))
+          : text.split("").map((letter, index) => (
+              <span
+                key={index}
+                className="letter"
+                style={{ whiteSpace: letter === " " ? "pre" : "normal" }}
+              >
+                {letter}
+              </span>
+            ))}
       </div>
       <input
-        placeholder="Write your frustrations here"
+        type="text"
+        placeholder="Write something here"
         className="input"
         onChange={handleChange}
         value={text}

@@ -10,7 +10,7 @@
 }
 
 .input {
-  width: 30%;
+  width: 90%;
   height: 100%;
   border: 2px solid white;
   outline: none;
@@ -25,16 +25,18 @@
   font-family: "Barlow";
 }
 
-.letters-container.animate .letter {
+.letter {
+  display: inline-block;
+  opacity: 1;
+}
+
+.letter.animate {
   animation: flyAndFade 0.5s linear forwards;
 }
 
 @keyframes flyAndFade {
-  50% {
-    transform: translateX(50px) translateY(-50px);
-    opacity: 0.5;
-  }
   100% {
+    transform: translateX(var(--x)) translateY(var(--y));
     opacity: 0;
   }
 }
