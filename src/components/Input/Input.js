@@ -1,22 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState} from "react";
 import "./Input.css";
 
-const Input = ({ handleInput }) => {
+const Input = ({  hasToDestroy, resetDestroy }) => {
+  const [text, setText] = useState("");
+
   const handleChange = (e) => {
-    setTimeout(() => {
-      handleInput(e.target.value);
-    }, 500);
+    setText(e.target.value)
   };
+
+  useEffect(() => {
+    if (hasToDestroy) {
+      setTimeout(() => {
+        resetDestroy();
+        setText("");
+      }, 5000);
+    }
+  }, [hasToDestroy, resetDestroy]);
 
   return (
     <div className="input-container">
-      <input
-        type="text"
-        placeholder="Write something here"
-        className="input"
-        onChange={(e) => {
-          handleChange(e);
-        }}
+      <textarea
+        placeholder="Write your frustrations here"
+        className={`input ${hasToDestroy ? 'destroy' : ''}`}
+        onChange={handleChange}
+        value={text}
       />
     </div>
   );
