@@ -4,9 +4,12 @@ import "./Input.css";
 const Input = ({ hasToDestroy, resetDestroy }) => {
   const [text, setText] = useState("");
   const [letters, setLetters] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(false);
+
 
   useEffect(() => {
     if (hasToDestroy) {
+      setIsDisabled(true);
       setLetters(
         text.split("").map((letter) => ({
           letter,
@@ -18,6 +21,7 @@ const Input = ({ hasToDestroy, resetDestroy }) => {
         resetDestroy();
         setLetters([]);
         setText("");
+        setIsDisabled(false);
       }, 3000);
     }
   }, [hasToDestroy, resetDestroy, text]);
@@ -56,11 +60,12 @@ const Input = ({ hasToDestroy, resetDestroy }) => {
       </div>
       <input
         type="text"
-        placeholder="Write something here"
+        placeholder="Write your thoughts..."
         className="input"
         onChange={handleChange}
         value={text}
         maxLength={1000}
+        disabled={isDisabled}
       />
       <div className="character-count">{text.length}/1000</div>
 
