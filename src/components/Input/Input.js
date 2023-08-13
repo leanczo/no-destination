@@ -60,7 +60,10 @@ const Input = ({ hasToDestroy, resetDestroy }) => {
         className="input"
         onChange={handleChange}
         value={text}
+        maxLength={1000}
       />
+      <div className="character-count">{text.length}/1000</div>
+
     </div>
   );
 };

@@ -1,5 +1,5 @@
 .input-container {
-  width: 80%;
+  width: 75%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -21,7 +21,7 @@
   background: transparent;
   color: white;
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
   font-family: "Barlow";
 }
 
@@ -32,6 +32,13 @@
 
 .letter.animate {
   animation: flyAndFade 0.5s linear forwards;
+}
+
+.character-count {
+  font-size: 14px;
+  color: #999;
+  margin-top: 5px;
+  margin-bottom: 25px;
 }
 
 @keyframes flyAndFade {
