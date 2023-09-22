@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Input.css";
 
-const Input = ({ hasToDestroy, resetDestroy }) => {
+const Input = ({ hasToDestroy, resetDestroy, onEnterPress }) => {
   const [text, setText] = useState("");
   const [letters, setLetters] = useState([]);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -28,6 +28,10 @@ const Input = ({ hasToDestroy, resetDestroy }) => {
 
   const handleChange = (e) => {
     setText(e.target.value);
+  };
+
+  const handleKeyDown = (e) => {
+    onEnterPress(e);
   };
 
   return (
@@ -66,6 +70,7 @@ const Input = ({ hasToDestroy, resetDestroy }) => {
         value={text}
         maxLength={1000}
         disabled={isDisabled}
+        onKeyDown={handleKeyDown}
       />
       <div className="character-count">{text.length}/1000</div>
 
